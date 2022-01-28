@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "901731701670",
+    "project_id": "firbase-lesson-2",
+    "storage_bucket": "firbase-lesson-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901731701670:android:cca02e90565ee34619f567",
+        "android_client_info": {
+          "package_name": "com.example.firebaselesson2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901731701670-lv3lklme01svui41i2sfp69kt825acrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWJq3-JymhV1_JFn7gRba5F5O13tRDE9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901731701670-lv3lklme01svui41i2sfp69kt825acrj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
