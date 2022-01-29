@@ -33,17 +33,24 @@ public class LoginViewModel extends AndroidViewModel {
         if (login.isEmpty() || password.isEmpty()) {
             Toast.makeText(getApplication().getApplicationContext(), "Введите логин или пароль", Toast.LENGTH_SHORT).show();
         } else {
-            firebaseAuth.signInWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Intent intent = new Intent(activity, StartActivity.class);
-                        activity.startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplication().getApplicationContext(), "Не верный логин или пароль", Toast.LENGTH_SHORT).show();
-                    }
+            firebaseAuth.signInWithEmailAndPassword(login, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Intent intent = new Intent(activity, StartActivity.class);
+                    intent.putExtra("key", firebaseAuth.getUid());
+                    activity.startActivity(intent);
+                } else {
+                    Toast.makeText(getApplication().getApplicationContext(), "Не верный логин или пароль", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+
+    public void userKeyVerification(MainActivity mainActivity, FirebaseAuth firebaseAuth) {
+        if (firebaseAuth.getUid()!=null) {
+            Intent intent = new Intent(mainActivity, StartActivity.class);
+            intent.putExtra("key", firebaseAuth.getUid());
+            mainActivity.startActivity(intent);
+
         }
     }
 }
