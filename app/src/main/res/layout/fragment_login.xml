@@ -6,8 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textImputRegisterEmail"
+            android:id="@+id/textImputTextViewLogin"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textImputRegisterEmail"
+            android:layout_below="@id/textImputTextViewLogin"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
@@ -44,39 +45,34 @@
             <EditText
                 android:id="@+id/textViewPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textImputPasswordControl"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewRegister"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textImputTextViewPassword"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Повторите пароль"
-            app:endIconMode="clear_text"
-            app:helperTextTextColor="@color/purple_700"
-            app:startIconDrawable="@drawable/key_icon">
-
-            <EditText
-                android:id="@+id/textViewPasswordControl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="70dp"
+            android:text="Создать аккаунт"
+            android:textColor="@color/purple_700"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
 
         <Button
-            android:id="@+id/buttonRegister"
+            android:id="@+id/buttonLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="80dp"
             android:layout_marginBottom="70dp"
-            android:text="Зарегестрировать пользователя" />
+            android:text="Войти" />
+
 
     </RelativeLayout>
 

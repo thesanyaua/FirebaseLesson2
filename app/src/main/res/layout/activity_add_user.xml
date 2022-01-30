@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/textViewName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Имя" />
 
-        <EditText
-            android:id="@+id/textViewSurname"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textImputName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewName"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="20dp"
-            android:hint="Фамилия" />
+            android:hint="Имя"
+            app:endIconMode="clear_text"
+            app:helperTextTextColor="@color/purple_700"
+            app:startIconDrawable="@drawable/icon_person">
 
-        <EditText
-            android:id="@+id/textViewPhoneNumber"
+            <EditText
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textImputSurname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewSurname"
+            android:layout_below="@id/textImputName"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:hint="Номер телефона" />
+            android:layout_marginTop="10dp"
+            android:hint="Фамилия"
+            app:endIconMode="clear_text"
+            app:helperTextTextColor="@color/purple_700"
+            app:startIconDrawable="@drawable/icon_person">
+
+            <EditText
+                android:id="@+id/textViewSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textImputPhoneNumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/textImputSurname"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Номер телефона"
+            app:endIconMode="clear_text"
+            app:helperTextTextColor="@color/purple_700"
+            app:startIconDrawable="@drawable/icon_phone">
+
+
+            <EditText
+                android:id="@+id/textViewPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonAddUser"

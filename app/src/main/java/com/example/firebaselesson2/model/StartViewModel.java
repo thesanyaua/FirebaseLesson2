@@ -1,6 +1,7 @@
 package com.example.firebaselesson2.model;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -10,7 +11,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.firebaselesson2.AddUserActivity;
-import com.example.firebaselesson2.StartActivity;
 import com.example.firebaselesson2.adapters.UserAdapter;
 import com.example.firebaselesson2.other.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,10 +30,10 @@ public class StartViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void goToAddUserActivity(StartActivity startActivity, String key) {
-        Intent intent = new Intent(startActivity, AddUserActivity.class);
+    public void goToAddUserActivity(Context context, String key) {
+        Intent intent = new Intent(context, AddUserActivity.class);
         intent.putExtra("key", key);
-        startActivity.startActivity(intent);
+        context.startActivity(intent);
     }
 
 
