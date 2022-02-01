@@ -1,24 +1,35 @@
 package com.example.firebaselesson2.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.firebaselesson2.R;
 import com.example.firebaselesson2.databinding.FragmentStartBinding;
 import com.example.firebaselesson2.model.StartViewModel;
+import com.example.firebaselesson2.other.Note;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Collections;
+import java.util.List;
 
 public class StartFragment extends Fragment {
     FragmentStartBinding binding;
@@ -47,24 +58,15 @@ public class StartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(key);
         startViewModel = new ViewModelProvider(this).get(StartViewModel.class);
 
-        startViewModel.getListAllUsers(databaseReference).observe(getViewLifecycleOwner(), users -> {
-            startViewModel.getUserAdapter().setListInAdapter(users);
-            binding.recyclerViewUser.setAdapter(startViewModel.getUserAdapter());
-        });
-
-        binding.addUser.setOnClickListener(v -> startViewModel.goToAddUserActivity(getContext(), key));
-
-        binding.imageExit.setOnClickListener(v -> {
-            startViewModel.signOut();
-            Navigation.findNavController(v).navigate(R.id.action_startFragment_to_loginFragment);
-        });
-
-        binding.searchName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        //Нстройка toolBar
+        binding.toolBar.inflateMenu(R.menu.menu_start_fragment);
+        MenuItem searchItem = binding.toolBar.getMenu().findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -77,6 +79,25 @@ public class StartFragment extends Fragment {
             }
         });
 
+        binding.toolBar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.exit) {
+                startViewModel.signOut();
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_startFragment_to_loginFragment);
+            }
+            return false;
+        });
+
+
+        startViewModel.getListAllUsers(databaseReference).observe(getViewLifecycleOwner(), users -> {
+            Collections.reverse(users);
+            startViewModel.getUserAdapter().setListInAdapter(users);
+            binding.recyclerViewUser.setAdapter(startViewModel.getUserAdapter());
+        });
+
+        binding.addUser.setOnClickListener(v -> startViewModel.goToAddUserActivity(getContext(), key));
+
 
     }
+
 }

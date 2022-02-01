@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.firebaselesson2.AddUserActivity;
 import com.example.firebaselesson2.adapters.UserAdapter;
-import com.example.firebaselesson2.other.User;
+import com.example.firebaselesson2.other.Note;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StartViewModel extends AndroidViewModel {
-    MutableLiveData<List<User>> users = new MutableLiveData<>();
+    MutableLiveData<List<Note>> notes = new MutableLiveData<>();
     UserAdapter userAdapter = new UserAdapter();
 
     public StartViewModel(@NonNull Application application) {
@@ -37,17 +37,17 @@ public class StartViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<User>> getListAllUsers(DatabaseReference db) {
+    public LiveData<List<Note>> getListAllUsers(DatabaseReference db) {
 
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<User> list = new ArrayList<>();
+                List<Note> list = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    User user = dataSnapshot.getValue(User.class);
-                    list.add(user);
+                    Note note = dataSnapshot.getValue(Note.class);
+                    list.add(note);
                 }
-                users.postValue(list);
+                notes.postValue(list);
             }
 
             @Override
@@ -55,14 +55,14 @@ public class StartViewModel extends AndroidViewModel {
                 Toast.makeText(getApplication().getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        return users;
+        return notes;
     }
 
     public void filterUsers(String string) {
-        List<User> listFilterUsers = new ArrayList<>();
-        for (User user:users.getValue()) {
-            if (user.getName().toLowerCase().contains(string.toLowerCase())){
-                listFilterUsers.add(user);
+        List<Note> listFilterUsers = new ArrayList<>();
+        for (Note note:notes.getValue()) {
+            if (note.getHeading().toLowerCase().contains(string.toLowerCase())){
+                listFilterUsers.add(note);
             }
             getUserAdapter().setListInAdapter(listFilterUsers);
         }
@@ -75,6 +75,5 @@ public class StartViewModel extends AndroidViewModel {
     public UserAdapter getUserAdapter() {
         return userAdapter;
     }
-
 
 }

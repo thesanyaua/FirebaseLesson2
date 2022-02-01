@@ -54,14 +54,9 @@ public class LoginFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.startFragment, loginViewModel.getBundle());
         }
 
-
         binding.textViewRegister.setOnClickListener(v -> loginViewModel.goToRegisterActivity(getContext()));
 
-
-
-
-
-       binding.buttonLogIn.setOnClickListener(v -> {
+        binding.buttonLogIn.setOnClickListener(v -> {
             loginViewModel.logIn(binding.textViewLogin.getText().toString(), binding.textViewPassword.getText().toString()).observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean) {
                     Navigation.findNavController(view).navigate(R.id.startFragment, loginViewModel.getBundle());
