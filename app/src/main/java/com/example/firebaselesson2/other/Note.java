@@ -1,7 +1,7 @@
 package com.example.firebaselesson2.other;
 
 public class Note {
-    String id;
+    String timeCreate;
     String heading;
     int color;
     String text;
@@ -9,19 +9,19 @@ public class Note {
     public Note() {
     }
 
-    public Note(String id, String heading, int color, String text) {
-        this.id = id;
+    public Note(String timeCreate, String heading, int color, String text) {
+        this.timeCreate = timeCreate;
         this.heading = heading;
         this.color = color;
         this.text = text;
     }
 
-    public String getId() {
-        return id;
+    public String getTimeCreate() {
+        return timeCreate;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTimeCreate(String timeCreate) {
+        this.timeCreate = timeCreate;
     }
 
     public String getHeading() {

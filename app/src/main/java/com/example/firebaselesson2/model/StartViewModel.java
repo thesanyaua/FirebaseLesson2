@@ -19,11 +19,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class StartViewModel extends AndroidViewModel {
     MutableLiveData<List<Note>> notes = new MutableLiveData<>();
+    MutableLiveData<List<String>> keyPostList = new MutableLiveData<>();
     UserAdapter userAdapter = new UserAdapter();
 
     public StartViewModel(@NonNull Application application) {
@@ -43,11 +49,16 @@ public class StartViewModel extends AndroidViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Note> list = new ArrayList<>();
+                List<String> keyPost = new ArrayList<>();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Note note = dataSnapshot.getValue(Note.class);
+                    keyPost.add(dataSnapshot.getKey());
                     list.add(note);
+
                 }
                 notes.postValue(list);
+                keyPostList.postValue(keyPost);
             }
 
             @Override
@@ -68,12 +79,18 @@ public class StartViewModel extends AndroidViewModel {
         }
     }
 
+
+
     public void signOut() {
         FirebaseAuth.getInstance().signOut();
     }
 
     public UserAdapter getUserAdapter() {
         return userAdapter;
+    }
+
+    public LiveData<List<String>> getListKey() {
+        return keyPostList;
     }
 
 }

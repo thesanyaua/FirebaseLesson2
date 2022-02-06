@@ -10,9 +10,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,7 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class StartFragment extends Fragment {
     FragmentStartBinding binding;
@@ -64,8 +68,10 @@ public class StartFragment extends Fragment {
 
         //Нстройка toolBar
         binding.toolBar.inflateMenu(R.menu.menu_start_fragment);
+
         MenuItem searchItem = binding.toolBar.getMenu().findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -88,15 +94,21 @@ public class StartFragment extends Fragment {
             return false;
         });
 
-
+        //Add ListNote
         startViewModel.getListAllUsers(databaseReference).observe(getViewLifecycleOwner(), users -> {
             Collections.reverse(users);
             startViewModel.getUserAdapter().setListInAdapter(users);
             binding.recyclerViewUser.setAdapter(startViewModel.getUserAdapter());
         });
+        //Add KEY
+        startViewModel.getListKey().observe(getViewLifecycleOwner(), strings -> {
+            Collections.reverse(strings);
+            startViewModel.getUserAdapter().setKeyPostKeyUserAndActivity(strings, key, getActivity());
+        });
+
+
 
         binding.addUser.setOnClickListener(v -> startViewModel.goToAddUserActivity(getContext(), key));
-
 
     }
 

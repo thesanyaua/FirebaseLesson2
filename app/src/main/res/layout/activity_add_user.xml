@@ -12,95 +12,81 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/purple_700"
-            app:titleTextColor="@color/white"
-            android:theme="@style/SearchViewStyle" />
+            android:theme="@style/SearchViewStyle"
+            app:navigationIcon="@drawable/ic_back"
+            app:titleTextColor="@color/white" />
 
         <TextView
             android:id="@+id/textNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Цвет заметки"
-            android:textSize="14dp"
-            android:layout_marginStart="20dp"
             android:layout_below="@id/toolBar"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/purple_700"/>
+            android:text="Цвет заметки"
+            android:textColor="@color/purple_700"
+            android:textSize="14dp" />
 
         <LinearLayout
             android:id="@+id/line"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_below="@id/textNote"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@color/purple_700"
-            android:layout_marginEnd="20dp"/>
+            android:orientation="horizontal" />
 
 
         <TextView
             android:id="@+id/colorImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/black"
+            android:layout_below="@id/line"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/line"/>
+            android:background="@color/black" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_toEndOf="@id/colorImage"
             android:layout_height="50dp"
             android:layout_below="@id/line"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/colorImage" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textImputName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+        <EditText
+            android:id="@+id/textViewHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/spinner"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_below="@id/spinner"
             android:layout_marginEnd="20dp"
+            android:inputType="textCapSentences"
+            android:backgroundTint="#00111111"
             android:hint="Заголовок"
-            app:endIconMode="clear_text"
-            app:helperTextTextColor="@color/purple_700"
-            app:startIconDrawable="@drawable/ic_head_text">
-
-            <EditText
-                android:id="@+id/textViewHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:transitionName="startNote" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textImputSurname"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <EditText
+            android:id="@+id/textViewText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
             android:layout_above="@id/buttonAddUser"
-            android:layout_below="@id/textImputName"
+            android:layout_below="@id/textViewHeading"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:backgroundTint="#00111111"
             android:gravity="start"
-            android:hint="Текст"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_text"
-            app:helperTextTextColor="@color/purple_700">
-
-            <EditText
-                android:id="@+id/textViewText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/textNote"
+            android:textSize="20dp" />
 
 
         <Button
@@ -109,8 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="30dp"
             android:text="Добавить заметку" />
 
