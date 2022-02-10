@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
@@ -51,7 +52,7 @@ public class LoginFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         if (firebaseAuth.getUid() != null) {
-            Navigation.findNavController(view).navigate(R.id.startFragment, loginViewModel.getBundle());
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_startFragment, loginViewModel.getBundle());
         }
 
         binding.textViewRegister.setOnClickListener(v -> loginViewModel.goToRegisterActivity(getContext()));
@@ -59,7 +60,7 @@ public class LoginFragment extends Fragment {
         binding.buttonLogIn.setOnClickListener(v -> {
             loginViewModel.logIn(binding.textViewLogin.getText().toString(), binding.textViewPassword.getText().toString()).observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean) {
-                    Navigation.findNavController(view).navigate(R.id.startFragment, loginViewModel.getBundle());
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_startFragment, loginViewModel.getBundle());
                 }
             });
         });

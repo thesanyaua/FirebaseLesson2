@@ -66,7 +66,7 @@ public class StartFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference(key);
         startViewModel = new ViewModelProvider(this).get(StartViewModel.class);
 
-        //Нстройка toolBar
+        //Настройка toolBar
         binding.toolBar.inflateMenu(R.menu.menu_start_fragment);
 
         MenuItem searchItem = binding.toolBar.getMenu().findItem(R.id.search);
@@ -98,6 +98,7 @@ public class StartFragment extends Fragment {
         startViewModel.getListAllUsers(databaseReference).observe(getViewLifecycleOwner(), users -> {
             Collections.reverse(users);
             startViewModel.getUserAdapter().setListInAdapter(users);
+            binding.ProgressBar.setVisibility(View.GONE);
             binding.recyclerViewUser.setAdapter(startViewModel.getUserAdapter());
         });
         //Add KEY
